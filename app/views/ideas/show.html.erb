@@ -5,12 +5,10 @@
   <h4>Created by: <%= @idea.user.full_name  || 'DELETED'%></h4>
 
 
-  <% if can?(:crud, @idea) %>
   <div>
     <%= link_to "Edit", edit_idea_path(@idea)%>
     <%= link_to "Delete", idea_path(@idea), method: :delete, data: {confirm: "Are you sure?"} %>
   </div>
-  <% end %>
 
 
 
@@ -42,7 +40,6 @@
       <li>
         <p>
           <%= review.body %> <br />
-          <% if can? :crud, review %>
             <small>
               <%= link_to(
                 "Delete",
@@ -53,7 +50,6 @@
                 }
               ) %>
             </small>
-          <% end %>
 
           <% if user_signed_in? && can?(:like, review) %>
               <% like = current_user.likes.find_by_review_id(review) %>
